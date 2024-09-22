@@ -1,72 +1,50 @@
-# Products available in the store by category
+# Initial product dictionary
 products = {
-    "IT Products": [
-        ("Laptop", 1000),
-        ("Smartphone", 600),
-        ("Headphones", 150),
-        ("Keyboard", 50),
-        ("Monitor", 300),
-        ("Mouse", 25),
-        ("Printer", 120),
-        ("USB Drive", 15)
+    'IT products': [
+        {'name': 'Laptop', 'price': 800},
+        {'name': 'Mouse', 'price': 20},
+        {'name': 'Keyboard', 'price': 30}
     ],
-    "Electronics": [
-        ("Smart TV", 800),
-        ("Bluetooth Speaker", 120),
-        ("Camera", 500),
-        ("Smartwatch", 200),
-        ("Home Theater", 700),
-        ("Gaming Console", 450)
-    ],
-    "Groceries": [
-        ("Milk", 2),
-        ("Bread", 1.5),
-        ("Eggs", 3),
-        ("Rice", 10),
-        ("Chicken", 12),
-        ("Fruits", 6),
-        ("Vegetables", 5),
-        ("Snacks", 8)
+    'Electronics': [
+        {'name': 'Smartphone', 'price': 500},
+        {'name': 'Headphones', 'price': 50},
+        {'name': 'Speaker', 'price': 100}
     ]
 }
 
-
-def display_sorted_products(products_list, sort_order):
-    pass
-
-
-def display_products(products_list):
-    pass
-
-
-def display_categories():
-    pass
-
-
-def add_to_cart(cart, product, quantity):
-    pass
-
-def display_cart(cart):
-    pass
-
-
-def generate_receipt(name, email, cart, total_cost, address):
-    pass
-
-
+# Validate name function
 def validate_name(name):
-    pass
+    parts = name.split()
+    return len(parts) == 2 and all(part.isalpha() for part in parts)
 
+# Validate email function
 def validate_email(email):
-    pass
+    return '@' in email
 
+# Display categories function
+def display_categories():
+    print("Categories:")
+    for idx, category in enumerate(products.keys(), 1):
+        print(f"{idx}. {category}")
 
-def main():
-    pass
-    
+# Display products function
+def display_products(products_list):
+    print("Products:")
+    for idx, product in enumerate(products_list, 1):
+        print(f"{idx}. {product['name']} - ${product['price']}")
 
-""" The following block makes sure that the main() function is called when the program is run. 
-It also checks that this is the module that's being run directly, and not being used as a module in some other program. 
-In that case, only the part that's needed will be executed and not the entire program """
-if __name__ == "__main__":
-    main()
+# Display sorted products function
+def display_sorted_products(products_list, sort_order):
+    if sort_order == "asc":
+        return sorted(products_list, key=lambda x: x['price'])
+    elif sort_order == "desc":
+        return sorted(products_list, key=lambda x: x['price'], reverse=True)
+
+# Add to cart function
+def add_to_cart(cart, product, quantity):
+    if isinstance(product, dict):
+        cart.append({'name': product['name'], 'price': product['price'], 'quantity': quantity})
+    else:
+        raise TypeError("Product must be a dictionary.")
+
+# Display
